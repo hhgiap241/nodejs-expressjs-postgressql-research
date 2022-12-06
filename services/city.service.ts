@@ -1,10 +1,8 @@
-import cityDao from "./dao/city.dao";
 import {City} from "../models/model";
 import {CityTable} from "./db_table";
-import {CityNameExistedError} from "../http-error/CityNameExistedError";
 import db from "../utils/db/db";
 
-async function createCity(city: City): Promise<City> {
+async function insertCity(city: City): Promise<City> {
   const cityTable = convertToDbObject(city)
 
   const [insertedCity] = await db('city').insert({
@@ -39,6 +37,6 @@ function convertToModelObject(cityTable: CityTable): City {
 }
 
 export {
-  createCity,
+  insertCity,
   getAllCities,
 }

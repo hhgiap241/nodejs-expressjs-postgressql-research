@@ -1,24 +1,12 @@
-import express, {Request, Response, NextFunction} from "express"
-import * as cityController from "../../controllers/city.controller";
-import * as citySchema from '../../schemas/city.schema.json';
-import validate from "../../middleware/validate.middleware";
+import express, {Request, Response} from "express"
+import cityRoute from "./routes/city.route";
+import {loggerMiddleware} from "../../middleware/logger.middleware";
+import userRoute from "./routes/user.route";
 
 export const registerInterface = (app: express.Application) => {
-  app.use(restApi);
+  app.use('/api/v1/users', loggerMiddleware, userRoute);
+  app.use('/api/v1/cities', cityRoute);
+  app.use('/', (req: Request, res: Response) => {
+    res.send('Home Page');
+  });
 }
-
-const restApi: express.Router = express.Router({mergeParams: true});
-
-restApi.get("/api/v1/cities", async (req: Request, res: Response) => {
-  try {
-    const cities = await cityController.getAllCities();
-    res.status(200).json(cities);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
-restApi.post("/api/v1/cities", validate(citySchema), async (req: Request, res: Response) => {
-  let city = await cityController.createCity(req.body);
-  res.status(201).json(city);
-})

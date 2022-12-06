@@ -1,6 +1,7 @@
 import {City} from "../models/model";
 import {CityTable} from "./db_table";
 import db from "../utils/db/db";
+import CityNotFoundError from "../http-error/CityNotFoundError";
 
 async function insertCity(city: City): Promise<City> {
   const cityTable = convertToDbObject(city)
@@ -18,6 +19,14 @@ async function getAllCities(): Promise<City[]> {
   const citiesTable = await db('city')
 
   return citiesTable.map(convertToModelObject)
+}
+
+const getCityById = async (id: string): Promise<City> => {
+  const [city] = await db('city').where('city_id', id);
+  if (!city) {
+    throw new CityNotFoundError(400, 'City not found');
+  }
+  return convertToModelObject(city);
 }
 
 function convertToDbObject(city: City): CityTable {
@@ -39,4 +48,5 @@ function convertToModelObject(cityTable: CityTable): City {
 export {
   insertCity,
   getAllCities,
+  getCityById
 }

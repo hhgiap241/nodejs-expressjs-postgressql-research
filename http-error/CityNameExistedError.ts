@@ -1,10 +1,10 @@
-export class CityNameExistedError extends Error {
-  public status: number;
-  public message: string;
+import HttpError from "./HttpError";
 
-  constructor(status: number, message: string) {
-    super(message);
-    this.status = status;
-    this.message = message;
+export class CityNameExistedError extends HttpError {
+  public from: string;
+  constructor(status: number, message: string){
+    super(status, message);
+    this.from = 'CityNameExistedError';
   }
 }
+export default CityNameExistedError;

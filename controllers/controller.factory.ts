@@ -1,22 +1,32 @@
+import {City} from "../models/model";
+
 interface Service<T> {
-  // getItem(id: string): Promise<T>,
+  getItemById(id: string): Promise<T>,
 
   listItem(): Promise<T[]>,
+
   insertItem(item: T): Promise<T>,
 }
 
 interface Controller<T> {
-  // getItem(id: string): Promise<T>,
+  getItemById(id: string): Promise<T>,
 
   listItem(): Promise<T[]>,
+
   insertItem(item: T): Promise<T>,
 }
 
 const makeController = <T>(service: Service<T>): Controller<T> => {
+
   return {
-    // getItem: async (id: string): Promise<T> => {
-    //   return await service.getItem(id);
-    // },
+    getItemById: async (id: string): Promise<T> => {
+      try {
+        return await service.getItemById(id);
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    },
     listItem: async (): Promise<T[]> => {
       return await service.listItem();
     },

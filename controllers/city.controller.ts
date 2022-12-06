@@ -1,26 +1,37 @@
-import cityService from "../services/city.service";
-import {Request, Response} from "express";
+import * as cityService from "../services/city.service";
+import {City} from "../models/model";
 
-class HttpCityController {
-  async createCity(req: Request, res: Response) {
-    try {
-      const city = await cityService.createCity(req.body);
-      res.status(201).json(city);
-    } catch (err: any) {
-      console.log(`Error while creating city: `, err.message);
-      res.status(400).json({error: err.message});
-    }
-  }
+interface Service<T> {
+  getItem(id: string): Promise<T>,
+  listItem(): Promise<T[]>
+}
 
-  async getAllCities(req: Request, res: Response) {
-    try {
-      const cities = await cityService.getAllCities();
-      res.json(cities);
-    } catch (err: any) {
-      console.log(`Error while getting cities: `, err.message);
-      res.status(400).json({error: err.message});
+interface Controller<T> {
+  getItem(id: string): Promise<T>,
+  listItem(): Promise<T[]>
+}
+
+const makeController = <T>(service: Service<T>): Controller<T> => {
+  return {
+    getItem: async (id: string): Promise<T> => {
+      return await service.getItem(id);
+    },
+    listItem: async (): Promise<T[]> => {
+      return await service.listItem();
     }
   }
 }
 
-export default new HttpCityController();
+async function createCity(city: City): Promise<City> {
+  const createCityResult = await cityService.createCity(city);
+  return createCityResult;
+}
+
+async function getAllCities(): Promise<City[]> {
+  return await cityService.getAllCities();
+}
+
+export {
+  createCity,
+  getAllCities
+}

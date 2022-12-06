@@ -1,11 +1,12 @@
 // Update with your config settings.
 import {config} from 'dotenv';
+import {Knex} from "knex";
 
 config();
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
-export const knexfile = {
+export const knexfile: any = {
 
   development: {
     client: 'postgresql',

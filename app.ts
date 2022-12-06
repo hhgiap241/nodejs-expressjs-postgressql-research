@@ -1,20 +1,20 @@
 import morgan from "morgan";
-import express from "express";
-import {loggerMiddleware} from "./middleware/logger.middleware.js";
+import express, {Application, Request, Response} from "express";
+import {loggerMiddleware} from "./middleware/logger.middleware";
 import * as dotenv from 'dotenv';
-import userRoute from "./routes/user.route.js";
-import cityRoute from "./routes/city.route.js";
+import userRoute from "./routes/user.route";
+import cityRoute from "./routes/city.route";
 
 dotenv.config();
 
-const app = express();
+const app: Application = express();
 app.use(express.json());
 app.use(morgan('dev'));
 
 
 app.use('/api/v1/users', loggerMiddleware, userRoute);
 app.use('/api/v1/cities', cityRoute);
-app.use('/', (req, res) => {
+app.use('/', (req: Request, res: Response) => {
   res.send('Home Page');
 })
 

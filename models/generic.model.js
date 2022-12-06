@@ -1,4 +1,4 @@
-import db from '../utils/db/db.js';
+import db from '../utils/db/db.ts';
 
 export default function (tableName, idField) {
   return {

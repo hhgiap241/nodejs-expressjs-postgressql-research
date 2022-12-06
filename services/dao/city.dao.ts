@@ -1,7 +1,8 @@
-import db from '../../utils/db/db.js';
+import db from '../../utils/db/db';
+import {City} from "../../models/model";
 
 class CityDao {
-  async createCity(city) {
+  async createCity(city: City) {
     const [insertedCity] = await db('city').insert({
       city_name: city.city_name,
     }).returning('*');

@@ -15,4 +15,7 @@ const errorHandlingMiddleware = (error: any, req: Request, res: Response, next: 
   }
 }
 
-export default registerErrorHandlingMiddleware;
+export {
+  registerErrorHandlingMiddleware,
+  errorHandlingMiddleware
+};

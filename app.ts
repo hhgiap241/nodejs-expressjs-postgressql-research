@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 
 import "express-async-errors";
 import {registerInterface} from "./interfaces/rest";
-import registerErrorHandlingMiddleware from "./middleware/error.middleware";
+import {registerErrorHandlingMiddleware} from "./middleware/error.middleware";
 
 dotenv.config();
 

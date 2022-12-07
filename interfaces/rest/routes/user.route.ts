@@ -2,7 +2,8 @@ import express, {NextFunction, Request, Response} from "express";
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('All Users');
+  // res.send('All Users');
+  throw new Error('Error from user route');
 });
 
 router.get('/new', (req, res) => {

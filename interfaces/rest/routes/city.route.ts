@@ -7,25 +7,13 @@ import HttpError from "../../../http-error/HttpError";
 const router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {
-  try {
-    const cities = await cityController.listItem();
-    res.status(200).json(cities);
-  } catch (error) {
-    res.status(500).json(error);
-  }
+  const cities = await cityController.listItem();
+  res.status(200).json(cities);
 });
 
 router.get('/:id', async (req: Request, res: Response) => {
-  try {
-    const city = await cityController.getItemById(req.params.id);
-    res.status(200).json(city);
-  } catch (error) {
-    if (error instanceof HttpError) {
-      res.status(error.status).json(error);
-    } else {
-      res.status(500).json(error);
-    }
-  }
+  const city = await cityController.getItemById(req.params.id);
+  res.status(200).json(city);
 });
 
 

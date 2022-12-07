@@ -17,10 +17,13 @@ export const knexfile: any = {
       password: process.env.password,
       database: process.env.database
     },
-    pool: {min: 0, max: 10},
+    pool: {
+      min: 0,
+      max: 10,
+    },
     migrations: {
       tableName: 'knex_migrations'
     },
-    debug: true
+    debug: true,
   }
 };

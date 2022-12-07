@@ -1,5 +1,3 @@
-import {City} from "../models/model";
-
 interface Service<T> {
   getItemById(id: string): Promise<T>,
 
@@ -22,7 +20,7 @@ const makeController = <T>(service: Service<T>): Controller<T> => {
     getItemById: async (id: string): Promise<T> => {
       try {
         return await service.getItemById(id);
-      } catch (error) {
+      } catch (error: any) {
         console.log(error);
         throw error;
       }
@@ -31,7 +29,12 @@ const makeController = <T>(service: Service<T>): Controller<T> => {
       return await service.listItem();
     },
     insertItem: async (item: T): Promise<T> => {
-      return await service.insertItem(item);
+      try {
+        return await service.insertItem(item);
+      } catch (error: any) {
+        console.log(error);
+        throw error;
+      }
     }
   }
 }

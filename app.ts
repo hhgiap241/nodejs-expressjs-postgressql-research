@@ -1,7 +1,10 @@
 import morgan from "morgan";
-import express, {Application, Request, Response} from "express";
+import express, {Application} from "express";
 import * as dotenv from 'dotenv';
+
+import "express-async-errors";
 import {registerInterface} from "./interfaces/rest";
+import registerErrorHandlingMiddleware from "./middleware/error.middleware";
 
 dotenv.config();
 
@@ -11,6 +14,7 @@ app.use(morgan('dev'));
 
 
 registerInterface(app);
+registerErrorHandlingMiddleware(app);
 
 const PORT = process.env.app_port;
 app.listen(PORT, function () {

@@ -1,8 +1,8 @@
 import * as userService from '../services/user.service';
-import {User} from '../models/model';
 import {Controller, makeController} from './controller.factory';
+import UserModel from "../models/user.model";
 
-const userController: Controller<User> = makeController({
+const userController: Controller<UserModel> = makeController({
   getItemById: userService.getUserById,
   listItem: userService.getAllUsers,
   insertItem: userService.insertUser,

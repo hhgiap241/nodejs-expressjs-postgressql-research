@@ -1,7 +1,4 @@
-export interface CityTable {
-  city_id: number;
-  city_name: string;
-}
+
 
 export interface UserTable {
   id: number;
@@ -16,6 +13,14 @@ export interface UserTable {
 export interface ChannelTable {
   id: number;
   name: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface VideoTable {
+  id: number;
+  title: string;
+  channelId: number;
   created_at: string;
   updated_at: string;
 }

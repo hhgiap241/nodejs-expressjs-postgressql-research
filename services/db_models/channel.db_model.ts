@@ -1,7 +1,7 @@
 import {Model} from "objection";
-import {ChannelTable} from "../db_table";
+import {ChannelTable} from "./db_table";
 
-class Channel extends Model implements ChannelTable{
+class Channel extends Model implements ChannelTable {
   static get tableName() {
     return 'channel';
   }
@@ -14,6 +14,6 @@ class Channel extends Model implements ChannelTable{
   name!: string;
   created_at!: string;
   updated_at!: string;
-
 }
+
 export default Channel;

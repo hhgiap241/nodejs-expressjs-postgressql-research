@@ -3,7 +3,6 @@ import {config} from 'dotenv';
 config({
   path: '.env'
 });
-console.dir(process.env);
 export const {
   PORT,
   DB_HOST,

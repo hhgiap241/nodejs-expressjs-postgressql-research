@@ -1,15 +1,15 @@
 {
   "type": "object",
   "properties": {
-    "city_id": {
+    "id": {
       "type": "integer"
     },
-    "city_name": {
+    "name": {
       "type": "string"
     }
   },
   "required": [
-    "city_name"
+    "name"
   ],
   "additionalProperties": false
 }

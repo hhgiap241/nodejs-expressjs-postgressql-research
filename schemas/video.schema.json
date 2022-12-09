@@ -1,15 +1,18 @@
 {
   "type": "object",
   "properties": {
-    "city_id": {
+    "id": {
       "type": "integer"
     },
-    "city_name": {
+    "title": {
       "type": "string"
+    },
+    "channelId": {
+      "type": "integer"
     }
   },
   "required": [
-    "city_name"
+    "title"
   ],
   "additionalProperties": false
 }

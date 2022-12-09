@@ -1,6 +1,12 @@
 import knex from 'knex';
-import {knexfile} from "./knexfile";
-import {config} from 'dotenv';
+import knexConfig from "./knexfile";
+import {Model} from "objection";
 
-config();
-export default knex(knexfile.development);
+const db = knex(knexConfig.development);
+const setupDb = () => {
+  Model.knex(db);
+}
+export {
+  setupDb,
+  db
+};

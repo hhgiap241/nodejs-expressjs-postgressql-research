@@ -15,6 +15,7 @@ export interface ChannelTable {
   name: string;
   created_at: string;
   updated_at: string;
+  videos?: VideoTable[];
 }
 
 export interface VideoTable {

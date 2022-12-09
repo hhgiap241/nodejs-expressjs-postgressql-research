@@ -1,9 +1,9 @@
 class VideoModel {
   id: number;
   title: string;
-  channelId: number;
   created_at: string;
   updated_at: string;
+  channelId: number;
   constructor() {
     this.id = 0;
     this.title = '';

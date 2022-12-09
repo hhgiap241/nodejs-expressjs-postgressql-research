@@ -1,5 +1,6 @@
 import {Model} from "objection";
-import {ChannelTable} from "./db_table";
+import {ChannelTable, VideoTable} from "./db_table";
+import Video from "./video.db_model";
 
 class Channel extends Model implements ChannelTable {
   static get tableName() {
@@ -8,6 +9,19 @@ class Channel extends Model implements ChannelTable {
 
   static get idColumn() {
     return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      videos: {
+        relation: Model.HasManyRelation,
+        modelClass: Video,
+        join: {
+          from: 'channel.id',
+          to: 'video.channelId'
+        }
+      }
+    };
   }
 
   id!: number;

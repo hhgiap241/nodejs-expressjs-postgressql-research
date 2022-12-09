@@ -3,7 +3,7 @@ import {VideoTable} from "./db_table";
 
 class Video extends Model implements VideoTable {
   static get tableName() {
-    return 'channel';
+    return 'video';
   }
 
   static get idColumn() {

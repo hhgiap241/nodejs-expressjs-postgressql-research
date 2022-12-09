@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "channelId": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "name",
+    "email"
+  ],
+  "additionalProperties": false
+}

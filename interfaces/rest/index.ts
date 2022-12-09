@@ -4,7 +4,7 @@ import {loggerMiddleware} from "../../middleware/logger.middleware";
 import userRoute from "./routes/user.route";
 
 const registerInterface = (app: express.Application) => {
-  app.use('/api/v1/users', loggerMiddleware, userRoute);
+  app.use('/api/v1/users', userRoute);
   app.use('/api/v1/cities', cityRoute);
   app.use('/', (req: Request, res: Response) => {
     res.send('Home Page');

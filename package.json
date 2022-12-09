@@ -6,7 +6,12 @@
   "scripts": {
     "start": "node dist/app.js",
     "start:dev": "nodemon app.ts",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "migration:make": "npx knex migrate:make init --knexfile ./utils/db/knexfile.ts -x ts",
+    "migrate": "npx knex migrate:latest --knexfile ./utils/db/knexfile.ts",
+    "migrate:down": "npx knex migrate:down --knexfile ./utils/db/knexfile.ts",
+    "seed:make": "npx knex seed:make dev --knexfile ./utils/db/knexfile.ts",
+    "seed": "npx knex seed:run --knexfile ./utils/db/knexfile.ts"
   },
   "keywords": [],
   "author": "",

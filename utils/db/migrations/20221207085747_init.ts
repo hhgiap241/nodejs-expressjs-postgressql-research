@@ -1,0 +1,37 @@
+import {Knex} from "knex";
+
+
+export async function up(knex: Knex): Promise<void> {
+  await knex.schema
+    .createTable('channel', table => {
+      table.bigIncrements('id').unsigned().primary();
+      table.string('name', 255).notNullable();
+      table.timestamps(true, true);
+    })
+    .createTable('user', table => {
+      table.bigIncrements('id').unsigned().primary();
+      table.string('name', 255).notNullable();
+      table.string('email').notNullable().unique();
+      table.timestamps(true, true); // created_at, updated_at
+      table.integer('channelId').references('id').inTable('channel');
+    })
+    .createTable('video', table => {
+      table.bigIncrements('id').unsigned();
+      table.string('title').notNullable();
+      table.timestamps(true, true);
+      table
+      .integer('channelId')
+      .notNullable()
+      .references('id')
+      .inTable('channel');
+    });
+}
+
+
+export async function down(knex: Knex): Promise<void> {
+  await knex.schema
+    .dropTableIfExists('video')
+    .dropTableIfExists('user')
+    .dropTableIfExists('channel');
+}
+

@@ -15,7 +15,6 @@ interface Controller<T> {
 }
 
 const makeController = <T>(service: Service<T>): Controller<T> => {
-
   return {
     getItemById: async (id: string): Promise<T> => {
       try {

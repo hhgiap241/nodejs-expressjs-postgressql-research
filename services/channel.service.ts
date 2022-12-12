@@ -1,8 +1,7 @@
 import ChannelModel from "../models/channel.model";
 import Channel from './db_models/channel.db_model';
-import {ChannelTable, VideoTable} from "./db_models/db_table";
+import {ChannelTable} from "./db_models/db_table";
 import ItemNotFoundError from "../http-error/ItemNotFoundError";
-import * as videoService from './video.service';
 
 const getAllChannels = async (): Promise<ChannelModel[]> => {
   const channelsTable = await Channel
@@ -20,14 +19,16 @@ const getChannelById = async (id: string): Promise<ChannelModel> => {
                                 .withGraphFetched('videos');
   if (!findChannel)
     throw new ItemNotFoundError(404, "Channel doesn't exist");
-  return convertToModelObject(findChannel);
+  const channel: ChannelModel = convertToModelObject(findChannel);
+  console.log(channel.getId?.());
+  return channel;
 }
 
 const insertChannel = async (channel: ChannelModel): Promise<ChannelModel> => {
   const channelTable = convertToDbObject(channel);
   const createChannelData: Channel = await Channel.query()
                                                   .insert(channelTable)
-                                                  .into('channel');
+                                                  .returning('*');
   return convertToModelObject(createChannelData);
 }
 
@@ -46,7 +47,11 @@ const convertToModelObject = (channelTable: ChannelTable): ChannelModel => {
     name: channelTable.name,
     created_at: channelTable.created_at,
     updated_at: channelTable.updated_at,
-    videos: channelTable.videos
+    videos: channelTable.videos,
+    isPopular: channelTable?.videos!.length >= 2,
+    getId(): number {
+      return channelTable.id;
+    }
   };
 }
 

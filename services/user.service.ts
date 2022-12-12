@@ -1,9 +1,8 @@
 import {User as Users} from "./db_models/user.db_model";
 import UserNotFoundError from "../http-error/UserNotFoundError";
-import {ChannelTable, UserTable} from "./db_models/db_table";
+import {UserTable} from "./db_models/db_table";
 import UserEmailExistedError from "../http-error/UserEmailExistedError";
 import UserModel from "../models/user.model";
-import * as channelService from './channel.service';
 
 const getAllUsers = async (): Promise<UserModel[]> => {
   // convert to user model
@@ -37,7 +36,7 @@ const insertUser = async (user: UserModel): Promise<UserModel> => {
     throw new UserEmailExistedError(400, `This email ${user.email} already exists`);
   const createUserData: Users = await Users.query()
                                             .insert(userTable)
-                                            .into('user');
+                                            .returning('*');
   return convertToModelObject(createUserData);
 }
 
@@ -60,7 +59,7 @@ const convertToModelObject = (userTable: UserTable): UserModel => {
     created_at: userTable.created_at,
     updated_at: userTable.updated_at,
     channelId: userTable.channelId,
-    channel: userTable.channel,
+    channel: userTable.channel
   };
 }
 

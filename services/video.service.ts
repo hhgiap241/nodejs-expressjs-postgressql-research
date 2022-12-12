@@ -19,7 +19,7 @@ const insertVideo = async (video: VideoModel): Promise<VideoModel> => {
   const videoTable = convertToDbObject(video);
   const createVideoData: Video = await Video.query()
                                             .insert(videoTable)
-                                            .into('video');
+                                            .returning('*');
   return convertToModelObject(createVideoData);
 }
 

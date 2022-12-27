@@ -8,7 +8,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=ias
     ports:
-      - '5432:5432'
+      - '5555:5432'
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
       # copy the sql script to create tables

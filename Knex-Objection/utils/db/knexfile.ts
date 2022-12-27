@@ -6,11 +6,11 @@ const knexConfig: { [key: string]: Knex.Config } = {
   development: {
     client: 'postgresql',
     connection: {
-      host: DB_HOST,
-      port: Number(DB_PORT),
-      user: DB_USER,
-      password: DB_PASSWORD,
-      database: DB_DATABASE,
+      host: 'localhost',
+      port: 5555,
+      user: 'postgres',
+      password: 'postgres',
+      database: 'ias',
     },
     pool: {
       min: 2,
